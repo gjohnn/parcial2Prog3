@@ -88,10 +88,10 @@
     grid-template-columns: 0.2fr 0.8fr;
 }
 
-
+/* STORE */
 .store {
     height: 92vh;
-    background-color: rgb(85, 31, 77);
+    background-color: #eeee;
 }
 
 /* listAside */

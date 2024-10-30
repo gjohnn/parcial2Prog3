@@ -18,7 +18,7 @@ export const handleRenderList = (productosIn) => {
                 return `
                     <div id="product-${producto.categoria}-${index}">
                         <div>
-                            <img src="${producto.imagen}" />
+                            <img src='${producto.img}' />
                         </div>
                         <div>
                             <h2>${producto.nombre}</h2>

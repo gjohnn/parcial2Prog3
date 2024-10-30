@@ -41,8 +41,7 @@ const handleSaveOrModify = () => {
     };
 
     setInLocalStorage(obj);
-    console.log(obj);
-
+    handleGetProductsToStore();
     closeModal();
 };
 

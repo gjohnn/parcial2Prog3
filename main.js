@@ -1,64 +1,56 @@
 import { setInLocalStorage } from "./src/persistence/localStorage.js";
 import { renderCategories } from "./src/services/categories.js";
+import { handleGetProductsToStore } from "./src/views/store.js";
 import './style.css';
+
+// APP
+handleGetProductsToStore();
 renderCategories();
 
-// PRODUCT
+// Obtener elementos del DOM
+const buttonAddElement = document.getElementById("buttonAddElement");
+const acceptBtn = document.getElementById("acceptBtn");
+const buttonCancel = document.getElementById("cancelBtn");
+const modalPop = document.getElementById("modalPopUP");
 
-// ========= POPUP =========
-
-const buttonAdd = document.getElementById("buttonAddElement")
-
-buttonAdd.addEventListener("click", () => {
-    openModal();
-})
-
-const buttonCancel = document.getElementById("cancelBtn")
-
-buttonCancel.addEventListener("click", () => {
-    handleCancelBtn();
-})
-
-const handleCancelBtn = () => {
-    closeModal();
-}
-
-//ABRIR - CERRAR MODAL
+// Funciones
 const openModal = () => {
-    const modal = document.getElementById("modalPopUP")
-    modal.style.display = "flex";
-}
+    if (modalPop) {
+        modalPop.style.display = "flex";
+    }
+};
 
 const closeModal = () => {
-    const modal = document.getElementById("modalPopUP")
-    modal.style.display = "none";
-}
-
-// GUARDAR O MODIFICAR ELEMENTOS
-
-const acceptBtn = document.getElementById("acceptBtn")
-
-acceptBtn.addEventListener("click", () => {
-    handleSaveOrModify();
-})
+    if (modalPop) {
+        modalPop.style.display = "none";
+    }
+};
 
 const handleSaveOrModify = () => {
-    const nombreInput = document.getElementById("nombre").value
-    const imgInput = document.getElementById("img").value
-    const precioInput = document.getElementById("precio").value
-    const categoriaInput = document.getElementById("categoria").value
+    const nombre = document.getElementById("nombre").value;
+    const img = document.getElementById("img").value;
+    const precio = document.getElementById("precio").value;
+    const categoria = document.getElementById("categoria").value;
 
     let obj = {
-        id: new Date().toISOString(), 
-        nombreInput, 
-        imgInput, 
-        precioInput, 
-        categoriaInput
-    }
-    
+        id: new Date().toISOString(),
+        nombre,
+        img,
+        precio,
+        categoria
+    };
+
     setInLocalStorage(obj);
     console.log(obj);
 
     closeModal();
+};
 
-}
+// Eventos
+
+buttonAddElement.addEventListener("click", openModal);
+
+acceptBtn.addEventListener("click", handleSaveOrModify);
+
+buttonCancel.addEventListener("click", closeModal);
+

@@ -1,31 +1,25 @@
-// LOCAL STORAGE
-
-export const handleGetProducts = () => {
-    const productos = JSON.parse(localStorage.getItem("products"))
-    if (productos) {
-        return productos;
-    } else {
-        return [];
-    }
+// src/persistence/localStorage.js
+export const handleGetProductsLocalStorage = () => {
+    const productos = JSON.parse(localStorage.getItem("products"));
+    return productos ? productos : [];
 };
 
-//Guardar
-
 export const setInLocalStorage = (productIn) => {
-    //Traer elementos
-    let productsInLocal = handleGetProducts();
+    // Traer productos almacenados
+    let productsInLocal = handleGetProductsLocalStorage();
 
-    const existingIndex = productsInLocal.findIndex((productsInLocal) => {
-        productsInLocal.id == productIn.id
-    })
-    //Verificar si existe
-    if (existingIndex != -1) {
-        //Si existe, se reemplaza
+    // Buscar si el producto ya existe en el array
+    const existingIndex = productsInLocal.findIndex((product) => product.id === productIn.id);
+
+    // Verificar si existe
+    if (existingIndex !== -1) {
+        // Si existe, reemplazar
         productsInLocal[existingIndex] = productIn;
     } else {
-        productsInLocal.push(productIn)
+        // Si no existe, agregar
+        productsInLocal.push(productIn);
     }
 
-    localStorage.setItem("products", JSON.stringify(productsInLocal))
-
-}
+    // Guardar en Local Storage
+    localStorage.setItem("products", JSON.stringify(productsInLocal));
+};

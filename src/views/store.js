@@ -1,5 +1,7 @@
-// src/views/store.js
+
+import { setProductoActivo } from "../../main";
 import { handleGetProductsLocalStorage } from "../persistence/localStorage";
+import { openModal } from "./modal";
 
 export const handleGetProductsToStore = () => {
     const products = handleGetProductsLocalStorage();
@@ -16,24 +18,26 @@ export const handleRenderList = (productosIn) => {
         if (productos.length > 0) {
             const productosHTML = productos.map((producto, index) => {
                 return `
-                    <div id="product-${producto.categoria}-${index}">
+                    <div class="containerTargetItem" id="product-${producto.categoria}-${index}">
                         <div>
                             <img src='${producto.img}' />
                         </div>
-                        <div>
+                        <div >
                             <h2>${producto.nombre}</h2>
                         </div>
-                        <div>
-                            <p>Precio: ${producto.precio}</p>
-                            <p>Categoria: ${producto.categoria}</p>
+                        <div class="targetProps">
+                            <p><b>Precio</b>: $${producto.precio}</p>
+                            <p><b>Categoria</b>: ${producto.categoria}</p>
                         </div>
                     </div>`;
             });
 
             return `
-                <section>
-                <h3>${title}</h3>
-                <div>
+                <section class="sectionStore">
+                <div class="containerTitleSection">
+                    <h3>${title}</h3>
+                </div>
+                <div class="containerProductStore">
                     ${productosHTML.join("")}
                 </div>
                 </section>
@@ -55,7 +59,8 @@ export const handleRenderList = (productosIn) => {
         productosIn.forEach((element, index) => {
             const productContainer = document.getElementById(`product-${element.categoria}-${index}`);
             productContainer.addEventListener("click", () => {
-                console.log("ProductoActivo", element);
+                setProductoActivo(element);
+                openModal();
             });
         });
     };

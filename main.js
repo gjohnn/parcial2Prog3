@@ -1,55 +1,39 @@
-import { setInLocalStorage } from "./src/persistence/localStorage.js";
 import { renderCategories } from "./src/services/categories.js";
+import { openModal } from "./src/views/modal.js";
 import { handleGetProductsToStore } from "./src/views/store.js";
 import './style.css';
-
+import './src/services/product.js';
+import './src/services/categories.js';
+import { handleSearchProductByName } from "./src/services/searchBar.js";
 // APP
+
+export let categoriaActiva = null;
+
+export const setCategoriaActiva = (categoriaIn) => {
+    categoriaActiva = categoriaIn
+}
+
+
+export let productoActivo = null;
+
+export const setProductoActivo = (productoIn) => {
+    productoActivo = productoIn
+}
+
 handleGetProductsToStore();
 renderCategories();
+//HEADER
 
-// Obtener elementos del DOM
 const buttonAddElement = document.getElementById("buttonAddElement");
-const acceptBtn = document.getElementById("acceptBtn");
-const buttonCancel = document.getElementById("cancelBtn");
-const modalPop = document.getElementById("modalPopUP");
+buttonAddElement.addEventListener("click", () => {
+    openModal();
+});
 
-// Funciones
-const openModal = () => {
-    if (modalPop) {
-        modalPop.style.display = "flex";
-    }
-};
 
-const closeModal = () => {
-    if (modalPop) {
-        modalPop.style.display = "none";
-    }
-};
+//Search
 
-const handleSaveOrModify = () => {
-    const nombre = document.getElementById("nombre").value;
-    const img = document.getElementById("img").value;
-    const precio = document.getElementById("precio").value;
-    const categoria = document.getElementById("categoria").value;
-
-    let obj = {
-        id: new Date().toISOString(),
-        nombre,
-        img,
-        precio,
-        categoria
-    };
-
-    setInLocalStorage(obj);
-    handleGetProductsToStore();
-    closeModal();
-};
-
-// Eventos
-
-buttonAddElement.addEventListener("click", openModal);
-
-acceptBtn.addEventListener("click", handleSaveOrModify);
-
-buttonCancel.addEventListener("click", closeModal);
+const buttonSearch = document.getElementById("buttonSearch");
+buttonSearch.addEventListener("click", () => {
+    handleSearchProductByName();
+});
 

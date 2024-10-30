@@ -92,6 +92,68 @@
 .store {
     height: 92vh;
     background-color: #eeee;
+    width: 100%;
+}
+
+.sectionStore {
+    background-color: #eeee;
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerTitleSection {
+    margin: 1rem;
+    font-size: 3vh;
+    border-bottom: 1px solid grey;
+}
+
+.containerProductStore {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 0.6fr);
+    gap: 2vh;
+}
+
+.containerTargetItem {
+    width: 20vw;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.3);
+    padding: 0.4rem;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 0.4rem;
+    transition: .2s ease;
+}
+
+.containerTargetItem:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+}
+
+.containerTargetItem h2 {
+    font-size: 2vh;
+    text-align: center;
+}
+
+.targetProps {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.sectionStore img {
+    width: 100%;
+    border-radius: 0.4rem;
 }
 
 /* listAside */
@@ -122,6 +184,12 @@
 .listAside ul li {
     font-weight: 500;
     font-size: 2vh;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+}
+.listAside ul li:hover {
+    background-color: coral;
+   cursor: pointer;
 }
 
 .liActive {
@@ -186,7 +254,7 @@
     justify-content: space-around;
 }
 
-.buttonPopUP{
+.buttonPopUP {
     padding: 0.6rem;
     border: none;
     border-radius: 0.4rem;
@@ -194,11 +262,13 @@
 }
 
 .cancel {
-  background-color: rgb(158, 158, 84);
+    background-color: rgb(158, 158, 84);
 }
+
 .accept {
-  background-color: rgb(17, 113, 51);
+    background-color: rgb(17, 113, 51);
 }
+
 .delete {
-  background-color: rgb(151, 33, 33);
+    background-color: rgb(151, 33, 33);
 }

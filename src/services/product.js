@@ -3,7 +3,7 @@ import { productoActivo } from "../../main.js";
 import { handleGetProductsLocalStorage, setInLocalStorage } from "../persistence/localStorage.js";
 import { closeModal } from "../views/modal.js";
 import { handleGetProductsToStore, handleRenderList } from "../views/store.js";
-
+import Swal from 'sweetalert2'
 const acceptBtn = document.getElementById("acceptBtn");
 acceptBtn.addEventListener("click", () => {
     handleSaveOrModify();
@@ -38,6 +38,13 @@ const handleSaveOrModify = () => {
             categoria
         };
     }
+
+    Swal.fire({
+        title: "Correcto!",
+        text: "Producto guardado!",
+        icon: "success"
+    })
+
     setInLocalStorage(obj);
     handleGetProductsToStore();
     closeModal();
@@ -46,14 +53,23 @@ const handleSaveOrModify = () => {
 export const handleDeleteProduct = () => {
 
     const products = handleGetProductsLocalStorage();
+    console.log("Productos antes del filtrado:", products);
 
-    const result = products.filter((el) => el.id != productoActivo.id)
-    // Guardar en Local Storage
-    localStorage.setItem("products", JSON.stringify(result));
+    const filteredProducts = products.filter((el) => el.id !== productoActivo.id);
+    console.log("Productos después del filtrado:", filteredProducts);
+
+    localStorage.setItem("products", JSON.stringify(filteredProducts));
 
     const newProducts = handleGetProductsLocalStorage();
+    Swal.fire({
+        title: "Eliminado!",
+        text: "Producto eliminado!",
+        icon: "success"
+    })
     handleRenderList(newProducts);
+    closeModal();
 };
+
 
 // Eventos
 
